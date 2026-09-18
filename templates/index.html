@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100 Famous Quotes | Random Generator & Search</title>
+  <meta name="description" content="Explore 100 curated quotes from history's greatest thinkers, scientists, leaders, and artists. Generate random quotes and filter by category or author.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="header-content">
+        <div class="brand">
+          <div class="brand-icon">❝❞</div>
+          <div>
+            <h1 class="brand-title">QuoteVault</h1>
+            <p class="brand-subtitle">100 Timeless Quotes from Great Minds</p>
+          </div>
+        </div>
+        <div class="header-badges">
+          <span class="badge badge-accent" id="stats-badge">100 Quotes • 10 Categories</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero: Featured Random Quote -->
+      <section class="hero-section" aria-labelledby="hero-title">
+        <h2 id="hero-title" class="sr-only">Random Featured Quote</h2>
+        
+        <div class="quote-card featured-card" id="featured-quote-card">
+          <div class="quote-decorator" aria-hidden="true">“</div>
+          <blockquote class="featured-quote-text" id="featured-quote-text">
+            Loading quote of inspiration...
+          </blockquote>
+          <div class="featured-meta">
+            <cite class="featured-author" id="featured-author">—</cite>
+            <span class="category-pill" id="featured-category">General</span>
+          </div>
+
+          <div class="hero-actions">
+            <button type="button" class="btn btn-primary" id="new-quote-btn" title="Get another random quote (Press Space or R)">
+              <span class="btn-icon">🎲</span> New Random Quote
+              <kbd class="btn-kbd">Space</kbd>
+            </button>
+            <button type="button" class="btn btn-secondary" id="copy-quote-btn" title="Copy quote to clipboard">
+              <span class="btn-icon">📋</span> Copy Quote
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Search & Filters Section -->
+      <section class="filters-section" aria-labelledby="filters-title">
+        <div class="section-header">
+          <h2 id="filters-title" class="section-title">Search & Browse Quotes</h2>
+          <span class="results-count" id="results-count">Loading collection...</span>
+        </div>
+
+        <!-- Filter Controls Bar -->
+        <div class="controls-panel">
+          <!-- Text Search Box -->
+          <div class="search-box-wrapper">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <input 
+              type="search" 
+              id="search-input" 
+              class="search-input" 
+              placeholder="Search by quote keyword or author name..." 
+              autocomplete="off"
+              aria-label="Search quotes"
+            >
+            <button type="button" id="clear-search-btn" class="clear-btn" aria-label="Clear search" hidden>×</button>
+          </div>
+
+          <!-- Author Dropdown Filter -->
+          <div class="author-filter-wrapper">
+            <label for="author-select" class="sr-only">Filter by Author</label>
+            <select id="author-select" class="custom-select">
+              <option value="">All Authors (All 100)</option>
+            </select>
+          </div>
+
+          <!-- Reset Button -->
+          <button type="button" class="btn btn-outline" id="reset-filters-btn" title="Reset all search filters">
+            Reset Filters
+          </button>
+        </div>
+
+        <!-- Category Pills Bar -->
+        <div class="categories-bar" id="categories-bar" role="tablist" aria-label="Quote Categories">
+          <button type="button" class="cat-chip active" data-category="">
+            All <span class="chip-count" id="total-count-badge">100</span>
+          </button>
+          <!-- Dynamic category chips will be injected here -->
+        </div>
+      </section>
+
+      <!-- Quotes Grid Results -->
+      <section class="gallery-section" aria-labelledby="gallery-title">
+        <h2 id="gallery-title" class="sr-only">Matching Quotes</h2>
+        <div class="quotes-grid" id="quotes-grid">
+          <!-- Quote cards will be dynamically rendered here -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="empty-state" hidden>
+          <div class="empty-icon">🔎</div>
+          <h3 class="empty-title">No quotes found</h3>
+          <p class="empty-text">No quotes matched your current search and category filters.</p>
+          <button type="button" class="btn btn-primary" id="empty-reset-btn">Reset All Filters</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Built with Python Flask &amp; Vanilla JavaScript • 100 Famous Quotes</p>
+      <div class="footer-hints">
+        <span><kbd>Space</kbd> or <kbd>R</kbd> for random quote</span>
+        <span><kbd>Esc</kbd> to clear search</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
